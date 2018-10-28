@@ -113,9 +113,9 @@ app.post('/frontEnd/v1/estaciones/',(request,response)=>{
 
 
 ////DELETE (para borrar registros de los clientes pero no accessible por el cliente solo el admin)
-app.delete('/frontEnd/v1/estaciones/:client',(request,response)=>{
-	let {client} = request.params;
-	DataClientMsg.findOneAndDelete(client).exec()
+app.delete('/frontEnd/v1/estaciones/:aid',(request,response)=>{
+	let {aid} = request.params;
+	DataClientMsg.findByIdAndDelete(aid).exec()
 	.then(success => {
 		response.status(200).send(success);
 	})
@@ -192,12 +192,18 @@ app.post('/frontEnd/message/estaciones/',(request,response)=>{
 ///UPDATE utiliza el (ID del cliente) 
 app.put('/frontEnd/message/estaciones/:aid',(request,response)=>{
 	let {aid} = request.params;
-	const {data}=request.body;
+	const {controlWord,temp_max,temp_min,adj_R1,adj_R2,TPR,controlStatus}=request.body;
 	
 	let updateDataClientMsg = {
-			data
+		controlWord,
+		temp_max,
+		temp_min,
+		adj_R1,
+		adj_R2,
+		TPR,
+		controlStatus
 	}
-	DataClientMsg.findByIdAndUpdate(aid,updateDataClientMsg,{new : true}).exec()
+	Message.findByIdAndUpdate(aid,updateDataClientMsg,{new : true}).exec()
 	.then(success =>{ ///success = registro editado
 		response.status(200).send(success);
 	})
@@ -206,9 +212,9 @@ app.put('/frontEnd/message/estaciones/:aid',(request,response)=>{
 	});
 });
 
-app.delete('/frontEnd/message/estaciones/:client',(request,response)=>{
-	let {client} = request.params;
-	DataClientMsg.findOneAndDelete(client).exec()
+app.delete('/frontEnd/message/estaciones/:aid',(request,response)=>{
+	let {aid} = request.params;
+	Message.findByIdAndDelete(aid).exec()
 	.then(success => {
 		response.status(200).send(success);
 	})
