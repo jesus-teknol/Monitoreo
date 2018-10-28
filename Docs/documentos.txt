@@ -1,0 +1,48 @@
+/////////////////////////////
+Acceso Base de Datos
+/////////////////////////////
+mlab:
+user:jjashimoto
+pass:admin!12
+
+///paso algo no actualiza el password
+
+db: control-sup-jashi
+user:admin
+pass:admin123
+
+mongodb://admin:admin123@ds149335.mlab.com:49335/control-sup-jashi
+
+update 26/10/2018
+no collections
+
+//////////////////////////////
+HEROKU
+user:jesus@teknol.com.mx	
+pass:jesusAdmin123
+
+app-name:control-sup-jashi.herokuapp
+url: https://control-sup-jashi.herokuapp.com/
+
+//////////////////////////////
+git-hub: jesus-teknol
+pass: usual
+
+///////
+MODULOS Información Schema
+{
+  "dht1_temp":40, 
+  "dht1_hmd":17, 
+  "dht2_temp":28, 
+  "dht2_hmd":14, 
+  "tr1_temp":10, 
+  "tr2_temp":12, 
+  "core_temp":17, 
+  "ac_state":0, 
+  "sec_remain":0, 
+  "temp_max":0, 
+  "temp_min":0, 
+  "adj_R1":0, 
+  "adj_R2":0, 
+  "TPR":0
+}
