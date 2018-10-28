@@ -24,12 +24,12 @@ pass:jesusAdmin123
 app-name:control-sup-jashi.herokuapp
 url: https://control-sup-jashi.herokuapp.com/
 
-//////////////////////////////
+/////////////////////////////
 git-hub: jesus-teknol
 pass: usual
 
 ///////
-MODULOS Información Schema
+MODULOS Informaciï¿½n Schema
 {
   "dht1_temp":40, 
   "dht1_hmd":17, 
@@ -45,4 +45,5 @@ MODULOS Información Schema
   "adj_R1":0, 
   "adj_R2":0, 
   "TPR":0
-}
+}
+
