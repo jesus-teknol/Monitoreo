@@ -31,7 +31,7 @@ https://picsum.photos/420/320?random
                <h5 className="card-title">{this.props.item.nombre}</h5>
                <p className="card-text">{this.props.item.edad}</p>
                <a onClick={this.onEliminarAlumno} href="#" className="btn btn-danger">Eliminar</a>
-            <a href ={'/Alumnos/Editar/' + this.props.item._id} className='btn btn-info'>Actualizar</a>
+            <a href ={'/Estaciones/Editar/' + this.props.item._id} className='btn btn-info'>Detalles</a>
            </div>
            </div>
                  );

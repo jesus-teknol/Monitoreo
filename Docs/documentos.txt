@@ -47,3 +47,4 @@ MODULOS Informaci�n Schema
   "TPR":0
 }
 
+Avance en el registro de estaciones crea la tabla de mensajes y la tabla de datos 

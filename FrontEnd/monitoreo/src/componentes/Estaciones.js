@@ -1,8 +1,8 @@
 import React from 'react';
 import axios from 'axios';
-import Card from '../componentes/Card'
+import Card from './Card'
 
-class Alumnos extends React.Component{
+class Estaciones extends React.Component{
     constructor(){
         super();
         this.state = {
@@ -55,4 +55,4 @@ updateAlumnosList = () =>{
     }
 }
 
-export default Alumnos;
+export default Estaciones;

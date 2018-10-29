@@ -44,7 +44,7 @@ class AlumnoReg extends React.Component{
     
     onSubmit = (e)=>{
         e.preventDefault();
-        if(this.state.nombre.length == 0 || this.state.apellido.length == 0 || this.state.edad <=18 ){
+        if(this.state.nombre.length == 0)// || this.state.apellido.length == 0 || this.state.edad <=18 ){
             alert(this.onSubmitError());
         }else{
         let jsonAlumnoNuevo = {

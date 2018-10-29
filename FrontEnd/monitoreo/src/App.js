@@ -11,9 +11,9 @@ import About from './componentes/About';
 import Contact from './componentes/Contact';
 import Error from './componentes/Error';
 import NavBar from './componentes/NavBar';
-import Alumnos from './componentes/Alumnos'
-import AlumnoReg from './componentes/AlumnoReg'
-import EditarAlumno from './componentes/EditarAlumno'
+import Estaciones from './componentes/Estaciones'
+import EstacionReg from './componentes/EstacionReg'
+import EditarEstacion from './componentes/EditarEstacion'
 /////////////
 class App extends Component {
   render() {
@@ -24,9 +24,9 @@ class App extends Component {
               <NavBar />
               <Switch>
                 <Route path ="/" component={Home} exact />
-                <Route path ="/Alumnos/Lista" component={Alumnos} exact />
-                <Route path ="/Alumnos/Registro" component={AlumnoReg} exact />
-                <Route path ="/Alumnos/Editar/:aid" component={EditarAlumno} exact />
+                <Route path ="/Estaciones/Lista" component={Estaciones} exact />
+                <Route path ="/Estaciones/Registro" component={EstacionReg} exact />
+                <Route path ="/Estaciones/Editar/:aid" component={EditarEstacion} exact />
                 <Route path ="/About" component={About} exact /> 
                 <Route path ="/Contact" component={Contact} exact />  
                 <Route component = {Error} />

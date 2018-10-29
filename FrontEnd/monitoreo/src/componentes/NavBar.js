@@ -24,11 +24,11 @@ class NavBar extends React.Component{
                        </li>
                        <li className="nav-item dropdown">
                                <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                               Alumnos
+                               Estaciones
                                </a>
                                <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-                               <NavLink className = "dropdown-item" to = '/Alumnos/Lista'>Lista</NavLink>
-                               <NavLink className="dropdown-item" to='/Alumnos/Registro'>Registro</NavLink>
+                               <NavLink className = "dropdown-item" to = '/Estaciones/Lista'>Lista</NavLink>
+                               <NavLink className="dropdown-item" to='/Estaciones/Registro'>Registro</NavLink>
 
                                </div>
                            </li>

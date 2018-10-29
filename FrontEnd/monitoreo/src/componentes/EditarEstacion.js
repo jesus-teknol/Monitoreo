@@ -1,14 +1,36 @@
 import React from 'react';
 import Axios from 'axios';
 
-class AlumnoReg extends React.Component{
-    constructor(){
-        super();
-        this.state={
-            nombre:'',
-            apellido: '',
+class EditarEstacion extends React.Component{
+    constructor(props){
+        super(props);
+        console.log(props.match.params);
+        this.state = {
+            id: props.match.params.aid,
+            nombre: '',
+            apellido:'',
             edad:0
         }
+        this.getAlumnoById(props.match.params.aid);
+    }
+    
+    
+
+    getAlumnoById= (id) =>{
+        Axios.get('https://app-alumnos-backended.herokuapp.com/api/v1/alumnos/'+id)
+        .then((success)=>{
+            console.log(success);
+            let alumno = success.data;
+            this.setState({
+                nombre:alumno.nombre,
+                apellido: alumno.apellidos,
+                edad:alumno.edad
+            })
+        })
+        .catch((error)=>{
+            console.log(error);
+            alert(error);
+        })
     }
 
     onInputChange = (e) =>{
@@ -27,21 +49,6 @@ class AlumnoReg extends React.Component{
         }
     }
 
-    onSubmitError= () =>{
-        let errorMsg = ['Error: Escriba su'];
-        if(this.state.nombre.length == 0){
-            errorMsg.push('nombre');
-        }
-        if(this.state.apellido.length == 0){
-            errorMsg.push('apellido');
-        }
-        if(this.state.edad <= 18){
-            errorMsg.push('y edad debe de ser mayor de 18');
-        }
-        let msg = errorMsg.join(" ");
-        return(msg);
-    }
-    
     onSubmit = (e)=>{
         e.preventDefault();
         if(this.state.nombre.length == 0 || this.state.apellido.length == 0 || this.state.edad <=18 ){
@@ -52,11 +59,11 @@ class AlumnoReg extends React.Component{
             apellidos: this.state.apellido,
             edad: this.state.edad
         }
-        Axios.post('https://app-alumnos-backended.herokuapp.com/api/v1/alumnos/',jsonAlumnoNuevo)
+        Axios.put('https://app-alumnos-backended.herokuapp.com/api/v1/alumnos/'+this.state.id,jsonAlumnoNuevo)
         .then((success)=>{
             console.log('Alumno Registrado ',success);
-            alert('Alumno Guardado');
-            this.setState({nombre:'',apellido:'',edad:0});
+            alert('Alumno Editado');
+            //this.setState({nombre:'',apellido:'',edad:0});
         })
         .catch((error)=>{
             console.log(error);
@@ -83,10 +90,10 @@ class AlumnoReg extends React.Component{
                    <label for="exampleInputPassword1">Edad</label>
                    <input type="number" value = {this.state.edad} className="form-control" id="EdadRegistro" placeholder="Edad" onChange={this.onInputChange}/>
                </div>
-                   <button type="submit" className="btn btn-primary">Registrar</button>
+                   <button type="submit" className="btn btn-primary">Actualizar</button>
                </form>
            </div>
         )};
 }
 
-export default AlumnoReg;
+export default EditarEstacion;
