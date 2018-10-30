@@ -6,7 +6,7 @@ class Estaciones extends React.Component{
     constructor(){
         super();
         this.state = {
-            lista_alumnos:[]
+            lista_estaciones:[]
         }
     }
 
@@ -15,40 +15,46 @@ componentWillMount(){
 }
 componentDidMount(){
     console.log("despues de cargar componente alumnos");
-    this.getAlumnos();
+    this.getEstaciones();
 }
 
-getAlumnos = () =>{
+getEstaciones = () =>{
     ///petición a la api (GET)
     /// npm install axios --save (libreria que permite hacer peticiones con promesas)
-    axios.get('https://app-alumnos-backended.herokuapp.com/api/v1/alumnos/')
+    // https://monitoreo-controladores.herokuapp.com/frontEnd/v1/estaciones/
+   // https://app-alumnos-backended.herokuapp.com/api/v1/alumnos/
+    axios.get('https://monitoreo-controladores.herokuapp.com/frontEnd/v1/estaciones/')
         .then((success)=>{
-                console.log(success.data);
-                this.setState({lista_alumnos : success.data});  
+                console.log(success);
+                this.setState({lista_estaciones : success.data});  
         })
         .catch((error)=>{
             console.log(error);
         })
 }
 
-updateAlumnosList = () =>{
-    if(this.state.lista_alumnos == 0){
+updateEstacionesList = () =>{
+    if(this.state.lista_estaciones == 0){
         return <h1>Cargando...</h1>
     }
     else{
-        let cardsAlumnos = this.state.lista_alumnos.map((elem) =>{
+        let cardsEstaciones = this.state.lista_estaciones.map((elem) =>{
             ///retornamos cards estudiantes
-            return <Card item={elem} getAlumnos ={this.getAlumnos}/>
+            //console.log(elem.data.length);
+            if(elem.data.length){
+            return <Card item={elem} getEstaciones={this.getEstaciones}/>
+         }
         });
-        return cardsAlumnos;
+        
+        return cardsEstaciones;
     }
 }
     render(){
         return(
             <div>
-                <h1>Alumnos</h1>
+                <h1>Estaciones</h1>
                 <div className='row'> 
-                {this.updateAlumnosList()}
+                {this.updateEstacionesList()}
                 </div>
             </div>
         );
