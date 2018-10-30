@@ -1,14 +1,16 @@
 import React from "react";
-//import ReactDOM from "react-dom";
+import ReactDOM from "react-dom";
 import Chart from "react-google-charts";
-
+/*
+ 1
+*/
 const options = {
   width: 200,
   height: 120,
-  redFrom: 90,
+  redFrom: 60,
   redTo: 100,
-  yellowFrom: 75,
-  yellowTo: 90,
+  yellowFrom: 40,
+  yellowTo: 60,
   minorTicks: 5
 };
 
@@ -26,10 +28,8 @@ class ChartGauge extends React.Component {
      console.log(this.state.dht2_temp);
     }
   
-  state = {
-    networkSpeed: 1,
-    memory: 80,
-    cpu: 55
+ state = {
+    memory: 80
   };
   intervalID = null;
 
@@ -51,8 +51,6 @@ class ChartGauge extends React.Component {
       this.setState(state => {
         return {
           ...state,
-          networkSpeed: getRandomNumber(),
-          cpu: getRandomNumber(),
           memory: this.state.dht2_temp
         };
       });
@@ -62,16 +60,20 @@ class ChartGauge extends React.Component {
   render() {
     // console.log(this.getData());
     /*
-      width="100%"
-      height="400px"
+     
     */
     return (
-      
+      <div className = "container">
+      <div className ="">
+      <div className ="g1">
         <Chart
           chartType="Gauge"
           data={this.getData()}
           options={options}
         />
+        </div>
+        </div>
+        </div>
     
     );
   }

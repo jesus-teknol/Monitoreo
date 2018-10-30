@@ -1,6 +1,6 @@
 import React from 'react';
 import Axios from 'axios';
-////configuración de parametros de operación desde MESSAGE
+////configuración de parametros de operación desde MESSAGE 3
 class EditarEstacion extends React.Component{
     constructor(props){
         super(props);

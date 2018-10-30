@@ -9,7 +9,8 @@ import Axios from 'axios';
     adj_R1:Number, 
     adj_R2:Number, 
     TPR:Number,
-    controlStatus:Number
+    controlStatus:Number 
+    
 */
 
 

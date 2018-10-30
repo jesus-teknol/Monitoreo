@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import Card from './Card'
-
+//
 class Estaciones extends React.Component{
     constructor(){
         super();
@@ -41,7 +41,7 @@ updateEstacionesList = () =>{
         let cardsEstaciones = this.state.lista_estaciones.map((elem) =>{
             ///retornamos cards estudiantes
             //console.log(elem.data.length);
-            if(elem.data.length){
+            if(elem.data.length>0){
             return <Card item={elem} getEstaciones={this.getEstaciones}/>
          }
         });

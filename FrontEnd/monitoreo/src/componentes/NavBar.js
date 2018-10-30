@@ -1,5 +1,5 @@
 import React from 'react';
-//import NavLink to Router
+//import NavLink to Router 3
 import {NavLink} from 'react-router-dom';
 
 class NavBar extends React.Component{
@@ -11,7 +11,7 @@ class NavBar extends React.Component{
         return(
             <div>
                 <nav className="navbar navbar-expand-lg navbar-light bg-light">
-               <a className="navbar-brand" href="#">MyApp</a>
+               <a className="navbar-brand" href="#">TEKNOL</a>
                <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                    <span className="navbar-toggler-icon"></span>
                </button>
