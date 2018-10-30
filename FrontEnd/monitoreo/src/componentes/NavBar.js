@@ -1,6 +1,9 @@
 import React from 'react';
 //import NavLink to Router 3
 import {NavLink} from 'react-router-dom';
+import logoTeknol from './img/LogoTeknolInst.png'
+
+//
 
 class NavBar extends React.Component{
     constructor(){
@@ -8,10 +11,18 @@ class NavBar extends React.Component{
     }
 
     render(){
+        //<a className="navbar-brand" href="#">TEKNOL</a>
+        
+        var divStyle = {
+            width:"15%",
+            height:"15%"
+          };
+          
         return(
             <div>
                 <nav className="navbar navbar-expand-lg navbar-light bg-light">
-               <a className="navbar-brand" href="#">TEKNOL</a>
+                <img className="navbar-brand" src={logoTeknol} alt="Logo Teknol" style={divStyle}/>
+               
                <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                    <span className="navbar-toggler-icon"></span>
                </button>

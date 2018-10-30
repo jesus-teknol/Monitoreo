@@ -2,8 +2,9 @@ import React from "react";
 import ReactDOM from "react-dom";
 import Chart from "react-google-charts";
 /*
- 1
+ 1//
 */
+//
 const options = {
   width: 200,
   height: 120,

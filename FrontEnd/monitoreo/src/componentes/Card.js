@@ -1,8 +1,9 @@
 import React from 'react';
 import Axios from 'axios';
 import ChartGauge from './ChartGauge'
-import EliminarEstacion from './EditarEstacion'
-
+import EliminarEstacion from './EliminarEstacion'
+import DetallesEstacion from './DetallesEstacion'
+//
 
 class Card extends React.Component{
     constructor(props){
@@ -12,24 +13,6 @@ class Card extends React.Component{
             client: "",
         }
        
-    }
-
-    onEliminarEstacion = () =>{
-
-
-
-        /*
-        Axios.delete('https://app-alumnos-backended.herokuapp.com/api/v1/alumnos/'+this.props.item._id)
-        .then((success) =>{
-            console.log("alumno Eliminado");
-            alert("Alumno Eliminado")
-            this.props.getAlumnos();
-        })
-        .catch((error)=>{
-            console.log(error);
-            alert("Error", error);
-        })
-        */
     }
 
     render(){
@@ -50,21 +33,13 @@ class Card extends React.Component{
         }; 
         if(dataItems.length > 0){
             actualdata =  dataItems[dataItems.length - 1];
-            
-            // console.log(actualdata);
-            // console.log(propsItems.client)
-            // console.log(actualdata.dht1_temp);
-            //dht2_temp
         }
-      //  <img className="card-img-top" src="https://picsum.photos/420/320?randomhttps://picsum.photos/420/320?random" alt="Card image cap"/>
-        // <a onClick={this.onEliminarAlumno} href="#" className="btn btn-danger">Eliminar</a>
-      return(
+
+        return(
 
             <div className="card col-3">
-            
-           
                 <div className="card-body">
-                
+                   
                     <h5 className="card-title">{propsItems.client.toUpperCase()}</h5>
                     <ChartGauge className="gauge col-3" items = {actualdata} />
                     <p className="card-text">Exterior: {actualdata.dht1_temp}°C</p>
@@ -74,7 +49,7 @@ class Card extends React.Component{
                     <p className="card-text">Pantalla: {actualdata.tr1_temp}°C</p>
                     <p className="card-text">Touch Screen: {actualdata.tr2_temp}°C</p>                
                     <a href ={'/Estaciones/EliminarEstacion/' + this.state.client} items = {this.state.client} className='btn btn-danger'>Eliminar</a>
-                    <a href ={'/Estaciones/DetallesEstacion/' + this.props.item} className='btn btn-info'>Detalles</a>
+                    <a href ={'/Estaciones/DetallesEstacion/'+ this.state.client} items = {this.props} className='btn btn-info'>Detalles</a>
                     <a href ={'/Estaciones/EditarEstacion/' + this.state.client} items = {this.state.client} className='btn btn-info'>Configurar</a>
                 </div>
            </div>

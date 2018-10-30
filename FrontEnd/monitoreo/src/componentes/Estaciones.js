@@ -1,7 +1,8 @@
 import React from 'react';
 import axios from 'axios';
 import Card from './Card'
-//
+import CardEmpty from './CardEmpty'
+//////
 class Estaciones extends React.Component{
     constructor(){
         super();
@@ -11,19 +12,15 @@ class Estaciones extends React.Component{
     }
 
 componentWillMount(){
-    console.log("antes de cargar componente alumnos");
+    //console.log("antes de cargar componente alumnos");
 }
 componentDidMount(){
-    console.log("despues de cargar componente alumnos");
+   // console.log("despues de cargar componente alumnos");
     this.getEstaciones();
 }
 
 getEstaciones = () =>{
-    ///petición a la api (GET)
-    /// npm install axios --save (libreria que permite hacer peticiones con promesas)
-    // https://monitoreo-controladores.herokuapp.com/frontEnd/v1/estaciones/
-   // https://app-alumnos-backended.herokuapp.com/api/v1/alumnos/
-    axios.get('https://monitoreo-controladores.herokuapp.com/frontEnd/v1/estaciones/')
+      axios.get('https://monitoreo-controladores.herokuapp.com/frontEnd/v1/estaciones/')
         .then((success)=>{
                 console.log(success);
                 this.setState({lista_estaciones : success.data});  
@@ -35,7 +32,11 @@ getEstaciones = () =>{
 
 updateEstacionesList = () =>{
     if(this.state.lista_estaciones == 0){
-        return <h1>Cargando...</h1>
+        return (
+            <div class="alert alert-success alert-dismissible">
+            <strong>Descargando!</strong> Espere un momento, aquiriendo información....
+          </div>
+        )
     }
     else{
         let cardsEstaciones = this.state.lista_estaciones.map((elem) =>{
@@ -44,6 +45,9 @@ updateEstacionesList = () =>{
             if(elem.data.length>0){
             return <Card item={elem} getEstaciones={this.getEstaciones}/>
          }
+            else{
+               return <CardEmpty item={elem} getEstaciones={this.getEstaciones}/>
+            }
         });
         
         return cardsEstaciones;

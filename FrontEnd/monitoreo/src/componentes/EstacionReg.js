@@ -1,6 +1,7 @@
 ///terminado
 import React from 'react';
 import Axios from 'axios';
+import { Redirect } from 'react-router';
     /*
     client:String,
     controlWord:String,
@@ -12,7 +13,7 @@ import Axios from 'axios';
     controlStatus:Number 
     
 */
-
+//
 
 class EstacionReg extends React.Component{
     constructor(){
@@ -25,17 +26,55 @@ class EstacionReg extends React.Component{
             adj_R1:16, 
             adj_R2:16, 
             TPR:5,
-            controlStatus:0
+            controlStatus:0,
+            redirectPage:0,
+            clientsData:[],
+            clientsMsg:[]
+           
         }
+        this.getEstacionByClient();
     }
 
-
+////////////////////////////******************** */
+getEstacionByClient= () =>{
+    let clientFoundedMsg;
+    let clientFoundedData;
+    Axios.get('https://monitoreo-controladores.herokuapp.com/frontEnd/message/estaciones/')
+    .then((success)=>{
+        clientFoundedMsg = success.data.map((elem)=>{
+            return elem.client;
+        }); 
+        this.setState({
+            clientsMsg:clientFoundedMsg
+        })
+        console.log(clientFoundedMsg);       
+     })
+    .catch((error)=>{
+        console.log(error);
+        
+    }) 
+    Axios.get('https://monitoreo-controladores.herokuapp.com/frontEnd/v1/estaciones/')
+    .then((success)=>{
+            clientFoundedData = success.data.map((elem)=>{
+                return elem.client;
+            });
+            this.setState({
+                clientsData:clientFoundedData
+            })
+            console.log(clientFoundedData);
+     })
+    .catch((error)=>{
+            console.log(error);
+     })        
+}
+///////////////////////////**********************  */
     onInputChange = (e) =>{
         console.log(e.target.id);
         console.log(e.target.value);
        // console.log(e.target.value.length);
        let id = e.target.id,
         value = e.target.value;
+                
         if(id == 'EstacionIdRegistro'){
             this.setState({client: value});
         }
@@ -70,9 +109,41 @@ class EstacionReg extends React.Component{
         e.preventDefault();
         let tempMaxValue = Number(this.state.temp_max),
             tempMinValue =Number(this.state.temp_min);
+            /////////////validacion cliente existente
+            let clientSearchdata = this.state.clientsData;
+            let clientSearchmsg = this.state.clientsMsg;
+            let clientName =this.state.client;
+            let clientStatus = 0
+            this.setState({
+                clientNoDisp:0
+            })
+            clientSearchdata.forEach((elem)=>{
+                if(elem == clientName){
+                    clientStatus = 1;
+                }   
+            });
+            
+            clientSearchdata.forEach((elem)=>{
+                if(elem ==  clientName){
+                    clientStatus = 1;
+                }
+            });
+             
+            console.log(clientName);
+            console.log(clientStatus);
+            console.log(clientSearchdata);
+            console.log(clientSearchmsg);
+           
+
+
         if(this.state.client.length == 0 || tempMaxValue < 35 || tempMinValue > 35 ){
             alert(this.onSubmitError());
-        }else{
+        }
+        else if(clientStatus == 1){
+            alert("Nombre de Estacion ID no Disponible");
+
+        }
+        else{
         let jsonEstacionNuevo = {
             client: this.state.client,
             controlWord:"",
@@ -83,11 +154,12 @@ class EstacionReg extends React.Component{
             TPR:5,
             controlStatus:0
         }
+        let validacion = 0;
+
         // https://monitoreo-controladores.herokuapp.com/frontEnd/message/estaciones/
         Axios.post('https://monitoreo-controladores.herokuapp.com/frontEnd/message/estaciones/',jsonEstacionNuevo)
         .then((success)=>{
             console.log('Estacion Registrada ',success);
-            alert('Estacion Registrada');
             this.setState({client:'',temp_max:40,temp_min:30});
         })
         .catch((error)=>{
@@ -103,18 +175,40 @@ class EstacionReg extends React.Component{
         Axios.post('https://monitoreo-controladores.herokuapp.com/frontEnd/v1/estaciones/',jsonDatosNuevos)
         .then((success)=>{
             console.log('Estacion Registrada datos',success);
-            alert('Tabla de Datos Creada');
+            alert("Registro Creado")
             this.setState({client:'',temp_max:40,temp_min:30});
         })
         .catch((error)=>{
             console.log(error);
             alert(error);
         });
+
+        this.setState({
+            redirectPage:1
+        })
+          
+        clientSearchdata.push(clientName);
+        clientSearchmsg.push(clientName);
+        this.setState({
+            clientsData:clientSearchdata,
+            clientsMsg:clientSearchmsg
+        })
         } 
+        
     }
+    
+    upDateData = () =>{
+        let actualdata = {
+            redirectPage:this.state.redirectPage
+        } 
+        
+        return actualdata;
+    } 
+
 //5bd661458867770015150fed  5bd661678867770015150fee
     render(){
         console.log(this.state);
+      
         return(
             <div className='row'>
                <form className = 'col-md-4 offset-md-4' onSubmit={this.onSubmit}>
@@ -134,7 +228,8 @@ class EstacionReg extends React.Component{
                    <button type="submit" className="btn btn-primary">Registrar</button>
                </form>
            </div>
-        )};
+        )
+    };
 }
 
 export default EstacionReg;

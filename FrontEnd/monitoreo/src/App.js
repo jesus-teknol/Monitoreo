@@ -4,7 +4,7 @@ import './App.css';
 //
 //import react-router-dom
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
-
+///
 ///componentes
 import Home from './componentes/Home';
 import About from './componentes/About';
@@ -16,6 +16,7 @@ import EstacionReg from './componentes/EstacionReg';
 import EditarEstacion from './componentes/EditarEstacion';
 import DetallesEstacion from './componentes/DetallesEstacion';
 import EliminarEstacion from './componentes/EliminarEstacion';
+const Footer = ({title}) => (<footer>{title}</footer>);
 /////////////
 class App extends Component {
   render() {
@@ -28,7 +29,7 @@ class App extends Component {
                 <Route path ="/" component={Home} exact />
                 <Route path ="/Estaciones/Lista" component={Estaciones} exact />
                 <Route path ="/Estaciones/Registro" component={EstacionReg} exact />
-                <Route path ="/Estaciones/DetallesEstacion/:aid" component={DetallesEstacion} exact />
+                <Route path ="/Estaciones/DetallesEstacion/:client" component={DetallesEstacion} exact />
                 <Route path ="/Estaciones/EditarEstacion/:client" component={EditarEstacion} exact />
                 <Route path ="/Estaciones/EliminarEstacion/:client" component={EliminarEstacion} exact />
                 <Route path ="/About" component={About} exact /> 
