@@ -101,6 +101,14 @@ getEstacionByClient= () =>{
             console.log("temp min: " + tempMinValue);
             errorMsg.push('Temperatura Minima menor 35 grados');
         }
+        if(tempMaxValue > 50) {
+            console.log("temp max: " + tempMaxValue);
+            errorMsg.push('Temperatura Maxima menor 50 grados');
+        }
+        if(tempMinValue < 28 ){
+            console.log("temp min: " + tempMinValue);
+            errorMsg.push('Temperatura Minima mayor 28 grados');
+        }
         let msg = errorMsg.join(" ");
         return(msg);
     }
@@ -136,7 +144,11 @@ getEstacionByClient= () =>{
            
 
 
-        if(this.state.client.length == 0 || tempMaxValue < 35 || tempMinValue > 35 ){
+        if(this.state.client.length == 0 
+            || tempMaxValue < 35 
+            || tempMaxValue > 50
+            || tempMinValue < 28
+            || tempMinValue > 35 ){
             alert(this.onSubmitError());
         }
         else if(clientStatus == 1){
@@ -220,10 +232,12 @@ getEstacionByClient= () =>{
                <div className="form-group">
                    <label for="exampleInputPassword1">Temperatura Maxima</label>
                    <input type="number" value = {this.state.temp_max} className="form-control" id="TempMaxRegistro" placeholder="Temperatura Máxima" onChange={this.onInputChange}/>
+                   <small id="emailHelp" className="form-text text-muted">Temperatura de Operación Max: 50°C Min: 35°C</small>
                </div>
                <div className="form-group">
                    <label for="exampleInputPassword1">Temperatura Minima</label>
                    <input type="number" value = {this.state.temp_min} className="form-control" id="TempMinRegistro" placeholder="Temperatura Mínima" onChange={this.onInputChange}/>
+                   <small id="emailHelp" className="form-text text-muted">Temperatura de Operación Min: 35°C Min: 28°C</small>
                </div>
                    <button type="submit" className="btn btn-primary">Registrar</button>
                </form>

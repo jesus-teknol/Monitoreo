@@ -24,10 +24,13 @@ class DetallesEstacion extends React.Component {
         super(props);
         this.state = {
             client:this.props.match.params.client,
-            data:[]
+            data:[],
+            graphData:[ "Sample" , "Temp_Ext"],
+            label:[]
         }
         this.getEstacionByClient(this.state.client);
     }
+   
 
     getEstacionByClient= (findClient) =>{
         Axios.get('https://monitoreo-controladores.herokuapp.com/api/v1/dataClientMsg/'+ findClient)
@@ -38,20 +41,18 @@ class DetallesEstacion extends React.Component {
             this.setState({
                 data:success.data.data
             });
-            console.log(this.state.data);
+            //////
+            let dataGraphTemp = this.state.data;
+            let datatest= dataGraphTemp.map((elem,id)=>{
+                return ([id, elem.dht1_temp]);
+            }) 
+            let label1 = [ "Sample" , "Temp Exterior"];
+            this.setState({
+               graphData: datatest,
+               label: label1
+             })
 
-            // console.log(success.data._id);
-            // let estacion = success.data;
-            // this.setState({
-            //     tpr: estacion.TPR,
-            //     adj_R1: estacion.adj_R1,
-            //     adj_R2: estacion.adj_R2,
-            //     controlStatus:estacion.controlStatus,
-            //     controlWord: estacion.controlWord,
-            //     temp_max: estacion.temp_max,
-            //     temp_min: estacion.temp_min,
-            //     id: estacion._id
-            // })
+            console.log(this.state.data);
          })
         .catch((error)=>{
             console.log(error);
@@ -59,17 +60,52 @@ class DetallesEstacion extends React.Component {
         })
     }
 
-    render() {
-        //console.log(data);
-        //console.log(this.state.client)
-        let dataGraph = this.state.data;
-       // console.log(dataGraph);
-        let label = [ "Sample" , "Temp_ext"];
-        let datatest= dataGraph.map((elem,id)=>{
+    onInputChange = (e) =>{
+       console.log(e.target.id);
+       let option = e.target.id;
+
+       let dataGraphTemp = this.state.data;
+       let datatest;
+        let label1;
+        
+        if(option == "TempExt"){
+        datatest= dataGraphTemp.map((elem,id)=>{
             return ([id, elem.dht1_temp]);
         }) 
-        console.log(label);
+        label1 = [ "Sample" , "Temp Exterior"];
+       }
+       else if(option == "TempInt") {
+        datatest= dataGraphTemp.map((elem,id)=>{
+            return ([id, elem.dht2_temp]);
+        }) 
+        label1 = [ "Sample" , "Temp Interior"];
+       }
+       else if(option == "TempPant") {
+        datatest= dataGraphTemp.map((elem,id)=>{
+            return ([id, elem.tr1_temp]);
+        }) 
+        label1 = [ "Sample" , "Temp Pantalla"];
+       }
+       else if(option == "TempTouch") {
+        datatest= dataGraphTemp.map((elem,id)=>{
+            return ([id, elem.tr2_temp]);
+        }) 
+        label1 = [ "Sample" , "Temp Touch"];
+       }
+
+       this.setState({
+         graphData: datatest,
+         label: label1
+       })
+        console.log(label1);
         console.log(datatest);
+    }
+
+    render() {
+       let datatestOut = this.state.graphData;
+       let labelOut = this.state.label;
+       console.log(datatestOut);
+       console.log(labelOut);
      
         return (
             <div className="App">
@@ -78,9 +114,10 @@ class DetallesEstacion extends React.Component {
                         Selección
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="#">Temperatura, %HR Exterior</a>
-                        <a class="dropdown-item" href="#">Temperatura, %HR Interior</a> 
-                        <a class="dropdown-item" href="#">Temperatura, Touch, Pantalla</a> 
+                        <a class="dropdown-item" href="#" id = "TempExt" onClick = {this.onInputChange}>Temperatura Exterior</a>
+                        <a class="dropdown-item" href="#" id= "TempInt" onClick = {this.onInputChange}>Temperatura Interior</a> 
+                        <a class="dropdown-item" href="#" id="TempPant" onClick = {this.onInputChange}>Temperatura Pantalla</a> 
+                        <a class="dropdown-item" href="#" id="TempTouch" onClick = {this.onInputChange}>Temperatura Touch</a> 
                     </div>
                     </ui>
 
@@ -88,7 +125,7 @@ class DetallesEstacion extends React.Component {
                     chartType="LineChart"
                     width="100%"
                     height="400px"
-                    data={[label, ...datatest]}
+                    data={[labelOut, ...datatestOut]}
                     options={options}
                 />
             </div>
