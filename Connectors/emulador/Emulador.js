@@ -1,9 +1,9 @@
 const request = require("request");
 
 /////User Info
-const idMsg      = "5bd8b5b7dfda7c001598bc79"; 
-const idData     = "5bd8b5b7dfda7c001598bc78";
-const client     = "client9"
+const idMsg      = "5bd9185ae3c7ce00151ce929"; 
+const idData     = "5bd9185ae3c7ce00151ce92a";
+const client     = "client5"
 /////Server API CONNECTION
 const apiServer  = "https://monitoreo-controladores.herokuapp.com/";
 const urlGetMsg  = apiServer + "frontEnd/message/estaciones/" + client;
@@ -136,7 +136,7 @@ getMsg(urlGetMsg)
 /////////////////////////FIN MENSAJERIA
 
 /////////////////////////Controlador a API Update de datos /////////////
-/*
+
 getData(urlGetData)
 .then((dataGet)=>{
 	console.log("Data Recibida");
@@ -178,4 +178,4 @@ getData(urlGetData)
 .catch((error)=>{
     	console.log(error);
     });
-*/
+
