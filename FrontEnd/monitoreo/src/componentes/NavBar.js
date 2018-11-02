@@ -44,11 +44,11 @@ class NavBar extends React.Component{
                                </div>
                            </li>
                        <li className="nav-item">
-                           <NavLink className = "nav-link" to = '/About'>About</NavLink>
+                           <NavLink className = "nav-link" to = '/About'>Información</NavLink>
                            {/* <a className="nav-link" href="#">About <span className="sr-only">(current)</span></a> */}
                        </li>
                        <li className="nav-item">
-                            <NavLink className = "nav-link" to = '/Contact'>Contact</NavLink>
+                            <NavLink className = "nav-link" to = '/Contact'>Contacto</NavLink>
                            {/* <a className="nav-link" href="#">Contact <span className="sr-only">(current)</span></a> */}
                        </li>
                        
