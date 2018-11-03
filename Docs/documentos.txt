@@ -9,7 +9,7 @@ pass:admin!12
 
 db: control-sup-jashi
 user:admin
-pass:admin123
+pass:
 
 mongodb://admin:admin123@ds149335.mlab.com:49335/control-sup-jashi
 
@@ -19,7 +19,7 @@ no collections
 //////////////////////////////
 HEROKU
 user:jesus@teknol.com.mx	
-pass:jesusAdmin123
+pass:
 
 app-name:control-sup-jashi.herokuapp
 url: https://control-sup-jashi.herokuapp.com/
